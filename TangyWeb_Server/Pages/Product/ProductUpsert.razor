@@ -33,10 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <SfRichTextEditor EditorMode=EditorMode.HTML>
-                        <p>Rich Text Editor allows to insert images from online source as well as local computer where you want to insert the image in your content.</p>
-                        <p><b>Get started Quick Toolbar to click on the image</b></p>
-                        <p>It is possible to add custom style on the selected image inside the Rich Text Editor through quick toolbar.</p>
+                    <SfRichTextEditor @bind-Value="Product!.Description">
                     </SfRichTextEditor>
                     <ValidationMessage For="()=>Product.Description" />
                 </div>
@@ -128,6 +125,7 @@
         @if (Product!.Id == 0)
         {
             await _productRepository.Create(Product);
+            await _jsRuntime.ToastrSuccess("Product Added Successfully");
         }
         else
         {
@@ -136,6 +134,7 @@
                 _fileUpload.DeleteFile(OldImageUrl);
             }
             await _productRepository.Update(Product);
+            await _jsRuntime.ToastrSuccess("Product Updated Successfully");
         }
         _navigationManager.NavigateTo("product");
     }
