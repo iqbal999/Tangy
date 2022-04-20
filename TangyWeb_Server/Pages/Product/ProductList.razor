@@ -80,7 +80,15 @@
         var authState = await AuthenticationState;
         if (!authState.User.Identity!.IsAuthenticated)
         {
-            _navigationManager.NavigateTo("/identity/account/login", forceLoad:true);
+            var uri = new Uri(_navigationManager.Uri);
+            _navigationManager.NavigateTo($"/identity/account/login?returnUrl={uri.LocalPath}", forceLoad:true);
+        }
+        else
+        {
+            if (!authState.User.IsInRole(SD.Role_Admin))
+            {
+                _navigationManager.NavigateTo("/ErrorPage");
+            }
         }
     }
 
@@ -92,7 +100,7 @@
         }
     }
 
-    private async Task LoadProducts()
+    private async Task LoadProducts() 
     {
         IsLoading = true;
         StateHasChanged();
