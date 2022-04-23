@@ -1,7 +1,10 @@
 ﻿@page "/summary"
+@using Microsoft.Extensions.Options;
 @inject ILocalStorageService _storageService
 @inject IProductService _productService
 @inject IJSRuntime _jsRuntime
+@inject IOrderService _orderService
+@inject IPaymentService _paymentService
 
 @attribute [Authorize]
 
@@ -162,6 +165,27 @@ else
 
     private async Task HandleCheckout()
     {
+        try
+        {
+            //IsProcessing = true;
+            var paymentDTO = new StripePaymentDTO()
+                {
+                    Order = Order
+                };
+
+            var result = await _paymentService.Checkout(paymentDTO);
+            Order.OrderHeader.SessionId = result.Data.ToString();
+
+            var orderDTOSaved = await _orderService.Create(paymentDTO);
+
+            await _jsRuntime.StripePayment(result.Data.ToString());
+
+        }
+        catch (Exception e)
+        {
+            await _jsRuntime.ToastrError(e.Message);
+        }
+
 
     }
 }

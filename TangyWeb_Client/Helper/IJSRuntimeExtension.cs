@@ -13,5 +13,10 @@ namespace TangyWeb_Client.Helper
         {
             await jsRuntime.InvokeVoidAsync("ShowToastr", "error", message);
         }
+
+        public static async ValueTask StripePayment(this IJSRuntime jsRuntime, string sessionId)
+        {
+            await jsRuntime.InvokeVoidAsync("redirectToCheckout", sessionId);
+        }
     }
 }

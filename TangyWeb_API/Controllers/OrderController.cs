@@ -36,7 +36,7 @@ namespace TangyWeb_API.Controllers
 
             var orderHeader = await _orderRepository.Get(orderHeaderId.Value);
 
-            if(orderHeader == null)
+            if (orderHeader == null)
             {
                 return BadRequest(new ErrorModelDTO()
                 {
@@ -45,6 +45,15 @@ namespace TangyWeb_API.Controllers
                 });
             }
             return Ok(orderHeader);
+        }
+
+        [HttpPost]
+        [ActionName("Create")]
+        public async Task<IActionResult> Create([FromBody] StripePaymentDTO paymentDTO)
+        {
+            paymentDTO.Order.OrderHeader.OrderDate = DateTime.Now;
+            var result = await _orderRepository.Create(paymentDTO.Order);
+            return Ok(result);
         }
     }
 }
