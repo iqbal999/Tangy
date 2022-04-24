@@ -167,7 +167,7 @@ else
     {
         try
         {
-            //IsProcessing = true;
+            IsProcessing = true;
             var paymentDTO = new StripePaymentDTO()
                 {
                     Order = Order
@@ -178,6 +178,7 @@ else
 
             var orderDTOSaved = await _orderService.Create(paymentDTO);
 
+            await _storageService.SetItemAsync(SD.Local_OrderDetails, orderDTOSaved);
             await _jsRuntime.StripePayment(result.Data.ToString());
 
         }
