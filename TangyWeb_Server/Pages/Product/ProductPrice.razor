@@ -29,15 +29,15 @@ else
         <GridEvents OnActionBegin="ActionHandler" TValue="ProductPriceDTO"></GridEvents>
         <GridFilterSettings Type="FilterType.Menu"></GridFilterSettings>
         <GridColumns>
-            <GridColumn IsPrimaryKey="true" AllowAdding="false" Field=@nameof(ProductPriceDTO.Id) HeaderText="ID" TextAlign="TextAlign.Left"></GridColumn>
-            <GridColumn Field=@nameof(ProductPriceDTO.Size) HeaderText="Size" TextAlign="TextAlign.Left">
+            <GridColumn IsPrimaryKey="true" AllowAdding="false" Field=@nameof(ProductPriceDTO.Id) HeaderText="ID"></GridColumn>
+            <GridColumn Field=@nameof(ProductPriceDTO.Size) HeaderText="Size">
                 <EditTemplate>
                     <Syncfusion.Blazor.DropDowns.SfDropDownList DataSource="SizeList" TItem="string" TValue="string"
                                                             @bind-Value="((context as ProductPriceDTO).Size)" AllowFiltering="true">
                     </Syncfusion.Blazor.DropDowns.SfDropDownList>
                 </EditTemplate>
             </GridColumn>
-            <GridColumn Field=@nameof(ProductPriceDTO.Price) HeaderText="Price" Format="C2" TextAlign="TextAlign.Left"></GridColumn>
+            <GridColumn Field=@nameof(ProductPriceDTO.Price) HeaderText="Price" Format="C2" ></GridColumn>
             <GridColumn HeaderText="Manage Record">
                 <GridCommandColumns>
                 <GridCommandColumn Type="CommandButtonType.Edit" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-edit", CssClass = "e-flat" })"></GridCommandColumn>

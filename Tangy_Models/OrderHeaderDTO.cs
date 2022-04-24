@@ -58,5 +58,9 @@ namespace Tangy_Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        // Tracking Info
+        public string? Tracking { get; set; }
+        public string? Carrier { get; set; }
     }
 }
