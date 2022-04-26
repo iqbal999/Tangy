@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Stripe.net" Version="39.107.0" />
   </ItemGroup>
 
   <ItemGroup>

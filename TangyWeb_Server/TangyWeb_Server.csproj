@@ -21,6 +21,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.3" />
     <PackageReference Include="Radzen.Blazor" Version="3.18.4" />
+    <PackageReference Include="Stripe.net" Version="39.107.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="Syncfusion.Blazor" Version="20.1.0.48" />
     <PackageReference Include="Syncfusion.Blazor.Themes" Version="20.1.0.48" />

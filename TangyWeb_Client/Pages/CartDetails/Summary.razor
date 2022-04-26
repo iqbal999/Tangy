@@ -174,12 +174,15 @@ else
                 };
 
             var result = await _paymentService.Checkout(paymentDTO);
-            Order.OrderHeader.SessionId = result.Data.ToString();
+            var StripeSessionAndPI = result!.Data!.ToString()!.Split(";");
+
+            Order.OrderHeader.SessionId =StripeSessionAndPI[0];
+            Order.OrderHeader.PaymentIntentId =StripeSessionAndPI[1];
 
             var orderDTOSaved = await _orderService.Create(paymentDTO);
 
             await _storageService.SetItemAsync(SD.Local_OrderDetails, orderDTOSaved);
-            await _jsRuntime.StripePayment(result.Data.ToString());
+            await _jsRuntime.StripePayment(StripeSessionAndPI[0]);
 
         }
         catch (Exception e)
